@@ -148,8 +148,13 @@ let cpuIntensivePromise1 = new Promise((resolve, reject) => {
 console.log("Use a promise that waits 1 second before it finishes," +
     " but is passed to an await expression");
 async function asyncFunction() {
+    console.log("Before await is called");
     let awaitedPromiseValue = await cpuIntensivePromise1;
+    console.log("After await is called");
+
+    console.log("Before awaitedPromiseValue is printed");
     console.log(awaitedPromiseValue)
+    console.log("After awaitedPromiseValue is printed");
 }
 
 asyncFunction();
