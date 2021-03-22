@@ -12,15 +12,17 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err)
         throw err;
+
     console.log("Connected to db");
 });
 
-connection.changeUser({database: 'mydb'}, (err) => {
+connection.changeUser({database: 'AquasoftInternship'}, (err) => {
     if (err) {
-        console.log("Error in changing database");
+        console.log("Error in switching to AquasoftInternship");
         return
     }
-    console.log("Database changed successfully");
+
+    console.log("Switched to AquasoftInternship");
 });
 
 module.exports = connection;

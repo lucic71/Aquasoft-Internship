@@ -1,62 +1,26 @@
-var Task = require('../models/appModel');
+var ProjectModel = require('../models/ProjectModel');
 
-exports.list_all_tasks = function(req, res) {
-    Task.getAllTask(function(err, task) {
-        console.log('list_all_tasks error')
+exports.create_new_project = (req, res) => {
+    var newProject = new ProjectModel(req.body);
 
-        if (err) {
+    // check that there are no empty fields
+    for (var k of Object.keys(newProject)) {
+        if (!newProject[k]) {
+            res.status(400).send({
+                error:true,
+                message: 'Please provide a ' + k
+            });
+
+            return;
+        }
+    }
+
+    ProjectModel.createProject(newProject, (err, project) => {
+        if (err)
             res.send(err);
-            console.log('res', task);
-        }
 
-        res.send(task);
+        res.json(project);
     });
-};
 
-exports.create_a_task = function(req, res) {
-  var new_task = new Task(req.body);
-
-  //handles null error
-   if(!new_task.task || !new_task.status){
-
-            res.status(400).send({ error:true, message: 'Please provide task/status' });
-
-        }
-else{
-
-  Task.createTask(new_task, function(err, task) {
-
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
+    console.log("Sucessfully created new project");
 }
-};
-
-exports.read_a_task = function(req, res) {
-  Task.getTaskById(req.params.taskId, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
-};
-
-
-exports.update_a_task = function(req, res) {
-  Task.updateById(req.params.taskId, new Task(req.body), function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
-};
-
-
-exports.delete_a_task = function(req, res) {
-
-
-  Task.remove( req.params.taskId, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json({ message: 'Task successfully deleted' });
-  });
-};
