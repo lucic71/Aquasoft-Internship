@@ -7,7 +7,7 @@ module.exports = app => {
   router.post("/", projects.create);
 
   // Retrieve all Projects
-  // router.get("/", projects.findAll);
+  router.get("/", projects.findAll);
 
   // Retrieve all published Projects
   // router.get("/published", projects.findAllPublished);
@@ -19,7 +19,7 @@ module.exports = app => {
   // router.put("/:id", projects.update);
 
   // Delete a Project with id
-  // router.delete("/:id", projects.delete);
+  router.delete("/:id", projects.delete);
 
   // Delete all Projects
   // router.delete("/", projects.deleteAll);

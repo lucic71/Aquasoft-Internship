@@ -7,7 +7,7 @@ module.exports = app => {
   router.post("/", employees.create);
 
   // Retrieve all employees
-  // router.get("/", employees.findAll);
+  router.get("/", employees.findAll);
 
   // Retrieve all published employees
   // router.get("/published", employees.findAllPublished);
@@ -19,7 +19,7 @@ module.exports = app => {
   // router.put("/:id", employees.update);
 
   // Delete a employee with id
-  // router.delete("/:id", employees.delete);
+  router.delete("/:id", employees.delete);
 
   // Delete all employees
   // router.delete("/", employees.deleteAll);

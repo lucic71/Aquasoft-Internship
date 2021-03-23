@@ -1,7 +1,16 @@
 const db = require('../models');
 const Employee = db.employees;
-const Op = db.Sequelize.Op;
-const utils = require('../utils');
+
+exports.findAll = (req, res) => {
+    Employee.findAll()
+        .then(data => { res.send(data); })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving employees."
+            });
+        });
+}
 
 exports.create = (req, res) => {
     if (!utils.isReqBodyOk(req.body)) {
@@ -27,6 +36,29 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while creating the employee."
+            });
+        });
+}
+
+exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    Employee.destroy({ where: { id: id } })
+        .then(ret_code => {
+            if (ret_code == 1) {
+                res.send({
+                    message: "Employee was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Employee with id=${id}. Not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Could not delete Employee with id=" + id
             });
         });
 }
