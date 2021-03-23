@@ -1,25 +1,10 @@
 const db = require('../models');
 const Project = db.projects;
-const Employee = db.employees;
 const Op = db.Sequelize.Op;
-
-const isReqBodyOk = reqBody => {
-    let fieldNo = 0;
-
-    for (const k of Object.keys(reqBody)) {
-        fieldNo++;
-        if (!reqBody[key])
-            return 0;
-    }
-
-    if (fieldNo == 0)
-        return 0;
-
-    return 1;
-}
+const utils = require('../utils');
 
 exports.create = (req, res) => {
-    if (!isReqBodyOk(req.body)) {
+    if (!utils.isReqBodyOk(req.body)) {
         res.status(400).send({
             message: "Project fields cannot be empty!"
         });
@@ -40,7 +25,7 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the tutorial."
+                    err.message || "Some error occurred while creating the project."
             });
         });
 }
