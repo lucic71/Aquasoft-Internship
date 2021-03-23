@@ -62,3 +62,25 @@ exports.delete = (req, res) => {
             });
         });
 }
+
+exports.update = (req, res) => {
+    const id = req.params.id;
+
+    Employee.update(req.body, { where: { id: id } })
+        .then(ret_code => {
+            if (ret_code == 1) {
+                res.send({
+                    message: "Employee was updated successfully."
+                });
+            } else {
+                res.send({
+                message: `Cannot update Employee with id=${id}. Not found!`
+            });
+        }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Employee with id=" + id
+            });
+        });
+};

@@ -62,3 +62,25 @@ exports.delete = (req, res) => {
             });
         });
 }
+
+exports.update = (req, res) => {
+    const id = req.params.id;
+
+    Project.update(req.body, { where: { id: id } })
+        .then(ret_code => {
+            if (ret_code == 1) {
+                res.send({
+                    message: "Project was updated successfully."
+                });
+            } else {
+                res.send({
+                message: `Cannot update Project with id=${id}. Not found!`
+            });
+        }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Project with id=" + id
+            });
+        });
+};
