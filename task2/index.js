@@ -10,10 +10,7 @@ const cors = require('cors');
 // Build the app using express
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
-app.use(cors(corsOptions));
+app.use(cors());
 console.log("CORS initialized!");
 
 app.use(bodyParser.json());
