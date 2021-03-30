@@ -1,5 +1,6 @@
 const db = require('../models');
 const Employee = db.employees;
+const utils = require('../utils');
 
 exports.findAll = (req, res) => {
     Employee.findAll()
@@ -24,11 +25,13 @@ exports.create = (req, res) => {
     const employee = {
         name: req.body.name,
         email: req.body.email,
-        hire_date: req.body.hire_date,
-        salary: req.body.salary,
+        hire_date: Date(req.body.hire_date),
+        salary: +req.body.salary,
         job_title: req.body.job_title,
-        project_id: req.body.project_id,
+        project_id: +req.body.project_id,
     };
+
+    console.log(employee);
 
     Employee.create(employee)
         .then(data => { res.send(data); })
