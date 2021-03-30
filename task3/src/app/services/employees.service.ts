@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ApiPaths } from '../enums/api-paths';
 import { Employee } from '../interfaces/employee';
+import { Message } from '../interfaces/message';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ import { Employee } from '../interfaces/employee';
 export class EmployeesService {
 
     private baseUrl = environment.baseUrl;
+    private httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
     constructor(private http: HttpClient) { }
 
@@ -22,6 +26,16 @@ export class EmployeesService {
             .pipe (
                 catchError(this.handleError<Employee[]>('getEmployees', []))
             );
+    }
+
+    deleteEmployee(employee_id: number): Observable<Message> {
+        const url = `${this.baseUrl}${ApiPaths.Employees}/${employee_id}`;
+        return this.http.delete<Message>(url, this.httpOptions);
+    }
+
+    addEmployee(employee: any): Observable<Message> {
+        const url = `${this.baseUrl}${ApiPaths.Employees}`;
+        return this.http.post<Message>(url, employee, this.httpOptions);
     }
 
     private handleError<T>(operation = 'operation', result?: T) {

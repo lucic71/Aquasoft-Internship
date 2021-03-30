@@ -1,27 +1,77 @@
 <p> Employees </p>
 
+<div>
+    <style>
+        label { display: block; }
+    </style>
+
+
+    <label id="employee-name"> Employee name: </label>
+    <input value="Jon Doe" for="employee-name" #name />
+
+    <label id="employee-email"> Employee email: </label>
+    <input value="jon.doe@example.com" for="employee-email" #email />
+
+    <label id="employee-hire-date"> Employee hire date: </label>
+    <input value="2020-20-20" for="employee-hire-date" #hireDate />
+
+    <label id="employee-salary"> Employee salary: </label>
+    <input value="20" for="employee-salary" #salary />
+
+    <label id="employee-job-title"> Employee job title: </label>
+    <input value="Manager" for="employee-job-title" #jobTitle />
+
+    <label id="employee-project-id"> Employee project id: </label>
+    <input for="employee-project-id" #projectId />
+
+    <label> <button (click)="add(
+            name.value,
+            email.value,
+            hireDate.value,
+            salary.value,
+            jobTitle.value,
+            projectId.value
+            )"> Add Employee </button> </label>
+</div>
+
 <table class="table table-striped">
     <thead>
     <tr>
         <th scope="col">#</th>
+        <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
         <th scope="col">Hire Date</th>
         <th scope="col">Salary</th>
         <th scope="col">Job Title</th>
         <th scope="col">Project ID</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
 
     <tbody>
         <tr *ngFor="let employee of employees; index as i">
             <th scope="row"> {{ i + 1 }} </th>
+            <td> {{ employee.id }} </td>
             <td> {{ employee.name }} </td>
             <td> {{ employee.email }} </td>
             <td> {{ employee.hire_date | date }} </td>
             <td> {{ employee.salary | currency }} </td>
             <td> {{ employee.job_title }} </td>
             <td> {{ employee.project_id }} </td>
+            <td> <button class="edit"
+                         title="edit employee"
+                         (click)="edit(employee)">
+                    edit 
+                </button>
+            </td>
+            <td> <button class="delete"
+                         title="delete employee"
+                         (click)="delete(employee)">
+                    delete 
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
