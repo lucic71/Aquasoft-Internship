@@ -1,5 +1,25 @@
-<ul class="projects">
-    <li *ngFor="let project of projects">
-        <span class="badge"> {{project.project_name}} </span> -- {{project.description}}
-    </li>
-</ul>
+<p> Projects </p>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Planned End Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Project Code</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let project of projects; index as i">
+            <th scope="row"> {{ i + 1 }} </th>
+            <td> {{ project.project_name }} </td>
+            <td> {{ project.start_date | date }} </td>
+            <td> {{ project.planned_end_date | date }} </td>
+            <td> {{ project.description }} </td>
+            <td> {{ project.project_code }} </td>
+        </tr>
+    </tbody>
+</table>

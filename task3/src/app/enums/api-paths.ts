@@ -1,3 +1,4 @@
 export enum ApiPaths {
-    Projects = '/projects'
+    Projects = '/projects',
+    Employees = '/employees'
 }
