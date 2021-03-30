@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,7 +15,11 @@ import { EmployeesComponent } from './components/employees/employees.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+      HttpClientModule,
+      RouterModule.forRoot([
+          {path: 'projects', component: ProjectsComponent},
+          {path: 'employees', component: EmployeesComponent},
+      ])
   ],
   providers: [],
   bootstrap: [AppComponent]
