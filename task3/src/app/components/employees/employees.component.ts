@@ -11,6 +11,7 @@ import { EmployeesService } from '../../services/employees.service';
 export class EmployeesComponent implements OnInit {
 
     employees: Employee[] = [];
+    selectedEmployee?: Employee;
 
     constructor(private employeesService: EmployeesService) { }
 
@@ -44,4 +45,22 @@ export class EmployeesComponent implements OnInit {
 
     }
 
+    edit(id, name?, email?, hire_date?, salary?, job_title?, project_id?) {
+        this.employeesService.updateEmployee({
+            id: id,
+            ...(name) && {name: name},
+            ...(email) && {email: email},
+            ...(hire_date) && {hire_date: hire_date},
+            ...(salary) && {salary: salary},
+            ...(job_title) && {job_title: job_title},
+            ...(project_id) && {project_id: project_id},
+        }).subscribe(
+            () => this.getEmployees()
+        );
+
+    }
+
+    selectEmployeeToEdit(employee: Employee) {
+        this.selectedEmployee = employee;
+    }
 }

@@ -38,6 +38,11 @@ export class EmployeesService {
         return this.http.post<Message>(url, employee, this.httpOptions);
     }
 
+    updateEmployee(employee: any): Observable<Message> {
+        const url = `${this.baseUrl}${ApiPaths.Employees}/${employee.id}`;
+        return this.http.put<Message>(url, employee, this.httpOptions);
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             console.error(error);
