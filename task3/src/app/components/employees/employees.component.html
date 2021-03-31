@@ -1,45 +1,49 @@
-<p> Employees </p>
-
-<style type="text/css">
-#container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-}
-#left {
-  width: 50%;
-}
-#right {
-  width: 50%;
-}
-</style>
-
 <div id="container">
     <div id="left">
-        <style>
-            label { display: block; }
-        </style>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee name:</span>
+            </div>
+            <input type="text" value="Jon Doe" class="form-control" #name />
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee email:</span>
+            </div>
+            <input type="text" value="jon.doe@example.com" class="form-control" #email />
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee hire date:</span>
+            </div>
+            <input type="text" value="2020-20-20" class="form-control" #hireDate />
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee salary:</span>
+            </div>
+            <input type="text" value="20" class="form-control" #salary />
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee job title:</span>
+            </div>
+            <input type="text" value="Manager" class="form-control" #jobTitle />
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee project id:</span>
+            </div>
+            <input type="text" value="" class="form-control" #projectId />
+        </div>
 
 
-        <label id="employee-name"> Employee name: </label>
-        <input value="Jon Doe" for="employee-name" #name />
-
-        <label id="employee-email"> Employee email: </label>
-        <input value="jon.doe@example.com" for="employee-email" #email />
-
-        <label id="employee-hire-date"> Employee hire date: </label>
-        <input value="2020-20-20" for="employee-hire-date" #hireDate />
-
-        <label id="employee-salary"> Employee salary: </label>
-        <input value="20" for="employee-salary" #salary />
-
-        <label id="employee-job-title"> Employee job title: </label>
-        <input value="Manager" for="employee-job-title" #jobTitle />
-
-        <label id="employee-project-id"> Employee project id: </label>
-        <input for="employee-project-id" #projectId />
-
-        <label> <button (click)="add(
+        <label> <button type="button" class="btn btn-primary" (click)="add(
                 name.value,
                 email.value,
                 hireDate.value,
@@ -50,30 +54,49 @@
     </div>
 
     <div id="right" *ngIf="selectedEmployee">
-        <style>
-            label { display: block; }
-        </style>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee name:</span>
+            </div>
+            <input type="text" [value]="selectedEmployee.name" class="form-control" #name />
+        </div>
 
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee email:</span>
+            </div>
+            <input type="text" [value]="selectedEmployee.email" class="form-control" #email />
+        </div>
 
-        <label id="employee-name"> Employee name: </label>
-        <input [value]="selectedEmployee.name" for="employee-name" #name />
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee hire date:</span>
+            </div>
+            <input type="text" [value]="selectedEmployee.hire_date" class="form-control" #hireDate />
+        </div>
 
-        <label id="employee-email"> Employee email: </label>
-        <input [value]="selectedEmployee.email" for="employee-email" #email />
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee salary:</span>
+            </div>
+            <input type="text" [value]="selectedEmployee.salary" class="form-control" #salary />
+        </div>
 
-        <label id="employee-hire-date"> Employee hire date: </label>
-        <input [value]="selectedEmployee.hire_date" for="employee-hire-date" #hireDate />
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee job title:</span>
+            </div>
+            <input type="text" [value]="selectedEmployee.job_title" class="form-control" #jobTitle />
+        </div>
 
-        <label id="employee-salary"> Employee salary: </label>
-        <input [value]="selectedEmployee.salary" for="employee-salary" #salary />
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Employee project id:</span>
+            </div>
+            <input type="text" [value]="selectedEmployee.project_id" class="form-control" #projectId />
+        </div>
 
-        <label id="employee-job-title"> Employee job title: </label>
-        <input [value]="selectedEmployee.job_title" for="employee-job-title" #jobTitle />
-
-        <label id="employee-project-id"> Employee project id: </label>
-        <input [value]="selectedEmployee.project_id" for="employee-project-id" #projectId />
-
-        <label> <button (click)="edit(
+        <label> <button type="button" class="btn btn-primary" (click)="edit(
                 selectedEmployee.id,
                 name.value,
                 email.value,
@@ -111,13 +134,14 @@
             <td> {{ employee.salary | currency }} </td>
             <td> {{ employee.job_title }} </td>
             <td> {{ employee.project_id }} </td>
-            <td> <button class="edit"
+            <td> <button type="button"
+                         class="btn btn-primary"
                          title="edit employee"
                          (click)="selectEmployeeToEdit(employee)">
                     edit 
                 </button>
             </td>
-            <td> <button class="delete"
+            <td> <button class="btn btn-primary"
                          title="delete employee"
                          (click)="delete(employee)">
                     delete 
