@@ -4,6 +4,7 @@
     <thead>
     <tr>
         <th scope="col">#</th>
+        <th scope="col">ID</th>
         <th scope="col">Project Name</th>
         <th scope="col">Start Date</th>
         <th scope="col">Planned End Date</th>
@@ -15,6 +16,7 @@
     <tbody>
         <tr *ngFor="let project of projects; index as i">
             <th scope="row"> {{ i + 1 }} </th>
+            <td> {{ project.id }} </td>
             <td> {{ project.project_name }} </td>
             <td> {{ project.start_date | date }} </td>
             <td> {{ project.planned_end_date | date }} </td>
